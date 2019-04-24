@@ -65,6 +65,7 @@ public class OI {
   public OI() {
     aButton.whenPressed(new ActuateIntake(intakePos.open));
     bButton.whenPressed(new ActuateIntake(intakePos.close));
+    start.whenPressed(new ToggleCompressor());
     rightBumper.whenPressed(new ToggleIntake());
   }
 

@@ -26,6 +26,7 @@ import frc.robot.commands.*;
 public class Robot extends TimedRobot {
   public static Drivetrain m_drivetrain = new Drivetrain();
   public static Intake m_intake = new Intake();
+  public static Compressors m_compressors;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -37,6 +38,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_compressors = new Compressors();
+
+    //Must be last
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new MecanumDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
