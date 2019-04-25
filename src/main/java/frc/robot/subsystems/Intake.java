@@ -28,6 +28,11 @@ public class Intake extends Subsystem {
         rightIntake.set(intakeSpeed);
     }
 
+    public void intake(double intakeSpeedL, double intakeSpeedR) {
+        leftIntake.set(intakeSpeedL);
+        rightIntake.set(intakeSpeedR);
+    }
+
     public DoubleSolenoid.Value solenoidGet() {
         return this.solenoid.get();
     }

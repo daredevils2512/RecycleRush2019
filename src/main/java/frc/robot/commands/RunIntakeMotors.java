@@ -10,11 +10,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ToggleCompressor extends Command {
-  public ToggleCompressor() {
+public class RunIntakeMotors extends Command {
+
+  private Double m_speed;
+
+  public RunIntakeMotors(Double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_compressors);
+
+    m_speed = speed;
+
   }
 
   // Called just before this Command runs the first time
@@ -25,7 +30,7 @@ public class ToggleCompressor extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_compressors.toggleCompressor();
+    Robot.m_intake.intake(0.8 * m_speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

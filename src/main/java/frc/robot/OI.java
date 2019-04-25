@@ -67,6 +67,11 @@ public class OI {
     bButton.whenPressed(new ActuateIntake(intakePos.close));
     start.whenPressed(new ToggleCompressor());
     rightBumper.whenPressed(new ToggleIntake());
+    bButton.whileHeld(new RunIntakeMotors(1.0));
+    xButton.whileHeld(new RunIntakeMotors(-1.0));
+
+    sideButton.whileHeld(new ToteScoot(1));
+    sideButton.whenReleased(new ToteScoot(0));
   }
 
   public double desensitize(double val) {
@@ -87,5 +92,13 @@ public class OI {
 
   public double leftX() {
     return desensitize(driver.getRawAxis(0));
+  }
+
+  public double xTremeY() {
+    return desensitize(extreme.getRawAxis(1));
+  }
+
+  public double xTremeX() {
+    return desensitize(extreme.getRawAxis(0));
   }
 }
