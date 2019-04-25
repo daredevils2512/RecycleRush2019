@@ -1,49 +1,57 @@
 package frc.robot.subsystems;
 
+import javax.xml.validation.SchemaFactoryLoader;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANPIDController;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.*;
 
-public class Lift extends Subsystem {
+public class LiftPID extends PIDSubsystem {
 
-    float height[] = {0, -135, -195, -300, -408, -513, -619, -615};
-    float offset = 58;
-    float minSetPoint = 0;
+    public float height[] = {0, -135, -195, -300, -408, -513, -619, -615};
+    public float offset = 58;
+    public float minSetPoint = 0;
 
-    private DigitalInput liftBottom;
-    private DigitalInput liftTop;
+    private DigitalInput liftBottom = new DigitalInput(11);
+    private DigitalInput liftTop = new DigitalInput(10);
 
-    private WPI_TalonSRX lift1;
-    private WPI_TalonSRX lift2;
+    private WPI_TalonSRX lift1 = new WPI_TalonSRX(8);
+    private WPI_TalonSRX lift2 = new WPI_TalonSRX(2);
+    public boolean goingDown;
 
-    private Encoder heightEncoder;
+    private Encoder heightEncoder = new Encoder(8, 9, false);
 
-    public void Lift() {
-        liftBottom = new DigitalInput(11);
-        liftTop = new DigitalInput(10);
+    public LiftPID() {
 
-        lift1 = new WPI_TalonSRX(8);
-        lift2 = new WPI_TalonSRX(2);
+        super("LiftPID", 0.0, 0.0, 0.0);
+        setAbsoluteTolerance(4.0);
+        getPIDController().setContinuous(false);
 
-        heightEncoder = new Encoder(8, 9, false);
-        heightEncoder.setDistancePerPulse(1);
-        heightEncoder.setPIDSourceType(PIDSourceType.kRate);
+    }
+
+    @Override
+    protected double returnPIDInput() {
+        return heightEncoder.pidGet();
     }
 
     @Override
     protected void initDefaultCommand() {
     }
 
-    public void usePIDOutput(double output) {
+    protected void usePIDOutput(double output) {
         if ((!liftBottom.get() || (output < 0 && Robot.m_intake.solenoidGet() == Value.kForward))
          && ((!liftTop.get() || Robot.m_oi.extreme.getRawButton(7)) || output > 0 )) {
             float motorSetting;
@@ -89,5 +97,13 @@ public class Lift extends Subsystem {
                  lift2.set(0);
              }
         }
+    }
+
+    public PIDController retrivePIDController() {
+        return getPIDController();
+    }
+
+    public int getHeightEncoder() {
+        return this.heightEncoder.getRaw();
     }
 }
