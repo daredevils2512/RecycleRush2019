@@ -11,6 +11,7 @@ public class Intake extends Subsystem {
     private Victor leftIntake;
     private Victor rightIntake;
     private DoubleSolenoid solenoid;
+    private boolean cooperation = false;
 
     public Intake() {
         leftIntake = new Victor(RobotMap.leftIntakeID);
@@ -32,6 +33,10 @@ public class Intake extends Subsystem {
         leftIntake.set(intakeSpeedL);
         rightIntake.set(intakeSpeedR);
     }
+    
+    public boolean getCooperation() {
+        return cooperation;
+    }
 
     public DoubleSolenoid.Value solenoidGet() {
         return this.solenoid.get();
@@ -51,5 +56,9 @@ public class Intake extends Subsystem {
         } else {
             intakeOpen();
         }
+    }
+
+    public void setCooperation(Boolean coop) {
+        cooperation = coop;
     }
 }
