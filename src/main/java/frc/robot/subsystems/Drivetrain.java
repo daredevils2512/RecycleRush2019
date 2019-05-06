@@ -42,11 +42,13 @@ public class Drivetrain extends Subsystem {
     drivetrainSpeedController3.setInverted(true);
     drivetrainSpeedController4.setInverted(true);
   }
+///'\
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new frc.robot.commands.MecanumDrive());
   }
 
   public void drive(double ySpeed, double xSpeed, double zRotation) {

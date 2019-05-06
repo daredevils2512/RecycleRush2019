@@ -67,7 +67,7 @@ public class OI {
     bButton.whenPressed(new ActuateIntake(intakePos.close));
     start.whenPressed(new ToggleCompressor());
     rightBumper.whenPressed(new ToggleIntake());
-    bButton.whileHeld(new RunIntakeMotors(1.0));
+    yButton.whileHeld(new RunIntakeMotors(1.0));
     xButton.whileHeld(new RunIntakeMotors(-1.0));
 
     sideButton.whileHeld(new ToteScoot(1));
@@ -76,7 +76,7 @@ public class OI {
 
   public double desensitize(double val) {
     double result = val;
-    if (Math.abs(result) < 0.15) {
+    if (Math.abs(result) < 0.75) {
 			result = 0.0;
 		}
 		return result;

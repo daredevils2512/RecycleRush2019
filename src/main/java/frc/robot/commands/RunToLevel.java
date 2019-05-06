@@ -33,6 +33,11 @@ public class RunToLevel extends Command {
             Robot.m_liftPID.retrivePIDController().setPID(0.02, 0.0005, 0.0);
         }
     }
+
+    @Override
+    protected void execute() {
+        System.out.println("AAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+    }
     
     @Override
     protected boolean isFinished() {
