@@ -29,7 +29,10 @@ public class RunToHeight extends Command {
         }
     }
 
-
+    @Override
+    protected void execute() {
+        System.out.println("AAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+    }
 
     @Override
     protected boolean isFinished() {
