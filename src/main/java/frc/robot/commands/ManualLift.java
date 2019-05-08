@@ -10,16 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ToteScoot extends Command {
-
-  double intake;
-  double turn;
-  double m_speed;
-
-  public ToteScoot(double speed) {
+public class ManualLift extends Command {
+  public ManualLift() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    m_speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -30,15 +24,7 @@ public class ToteScoot extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    intake = (Robot.m_oi.xTremeX() * m_speed);
-    turn = (Robot.m_oi.xTremeZ() * m_speed);
-
-    if (Math.abs(intake) > 0.3) {
-      Robot.m_intake.intake(intake, intake);
-    } else if (Math.abs(turn) > 0.3) {
-      Robot.m_intake.intake(-turn, turn);
-    }
+    Robot.m_liftPID.runLift(Robot.m_oi.xTremeY());
   }
 
   // Make this return true when this Command no longer needs to run execute()

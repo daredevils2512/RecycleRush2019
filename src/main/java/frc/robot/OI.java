@@ -108,4 +108,8 @@ public class OI {
   public double xTremeX() {
     return desensitize(extreme.getRawAxis(0));
   }
+
+  public double xTremeZ() {
+    return desensitize(extreme.getRawAxis(2));
+  }
 }
