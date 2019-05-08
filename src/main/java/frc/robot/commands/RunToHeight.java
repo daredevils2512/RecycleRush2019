@@ -11,7 +11,7 @@ public class RunToHeight extends Command {
         requires(Robot.m_liftPID);
         this.m_targetHeight = targetHeight;
         Robot.m_liftPID.goingDown = false;
-        // TODO: might not be ok to use this everywhere
+        // TODO: might not be ok to use this ^ everywhere
 
     }
 
