@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.commands.ManualLift;
 import frc.robot.subsystems.*;
 
 public class LiftPID extends PIDSubsystem {
@@ -49,6 +50,7 @@ public class LiftPID extends PIDSubsystem {
 
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new ManualLift());
     }
 
     protected void usePIDOutput(double output) {
@@ -97,6 +99,11 @@ public class LiftPID extends PIDSubsystem {
                  lift2.set(0);
              }
         }
+    }
+
+    public void runLift(double speed) {
+        lift1.set(speed);
+        lift2.set(speed);
     }
 
     public PIDController retrivePIDController() {

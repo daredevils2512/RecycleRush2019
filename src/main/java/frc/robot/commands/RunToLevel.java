@@ -8,7 +8,7 @@ public class RunToLevel extends Command {
     
     private int m_level;
     // private boolean goingDown;
-    public void RunToLevel(int level) {
+    public RunToLevel(int level) {
 
         requires(Robot.m_liftPID);
         this.m_level = level;

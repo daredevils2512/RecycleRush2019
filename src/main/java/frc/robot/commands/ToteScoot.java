@@ -31,8 +31,8 @@ public class ToteScoot extends Command {
   @Override
   protected void execute() {
 
-    intake = (Robot.m_oi.xTremeY() * m_speed);
-    turn = (Robot.m_oi.xTremeX() * m_speed);
+    intake = (Robot.m_oi.xTremeX() * m_speed);
+    turn = (Robot.m_oi.xTremeZ() * m_speed);
 
     if (Math.abs(intake) > 0.3) {
       Robot.m_intake.intake(intake, intake);
@@ -44,7 +44,7 @@ public class ToteScoot extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

@@ -72,6 +72,13 @@ public class OI {
 
     sideButton.whileHeld(new ToteScoot(1));
     sideButton.whenReleased(new ToteScoot(0));
+
+    bottomRed.whenPressed(new RunToLevel(0));
+    bottomWhite.whenPressed(new RunToLevel(1));
+    midRed.whenPressed(new RunToLevel(2));
+    midWhite.whenPressed(new RunToLevel(3));
+    topRed.whenPressed(new RunToLevel(4));
+    topWhite.whenPressed(new RunToLevel(5));
   }
 
   public double desensitize(double val) {
@@ -100,5 +107,9 @@ public class OI {
 
   public double xTremeX() {
     return desensitize(extreme.getRawAxis(0));
+  }
+
+  public double xTremeZ() {
+    return desensitize(extreme.getRawAxis(2));
   }
 }
