@@ -30,7 +30,12 @@ public class RunIntakeMotors extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_intake.intake(0.8 * m_speed);
+    if (Robot.m_intake.getCooperation()) {
+      Robot.m_intake.intake(0.8 * m_speed);
+    } else {
+      Robot.m_intake.intake(m_speed);
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
