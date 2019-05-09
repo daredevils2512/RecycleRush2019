@@ -8,10 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
-/* ur mom is actually the biggest dumb that ever done existed in Endgame the hulk marries antmans Gf, then ironman has an allergic reaction to jelly beans and ur mon is till the big dumm and all tghe peol 
-now u are still the biggest dumb that ever done existed and now u wonder why ur still reading this and now ur realizing theres tow capital 'E's in endgame, ha u looked, whoops spelled endgame wrong, ha gottem again, go gommit the big kermit, i spelled commit wrong now go kermit tsunamicide.
 
-*/
 /**
  * Do NOT add any static variables to this class, or any initialization at all.
  * Unless you know what you are doing, do not modify this file except to
@@ -20,7 +17,6 @@ now u are still the biggest dumb that ever done existed and now u wonder why ur 
 public final class Main {
   private Main() {
   } 
-  //eeeeeeeyeeeeeeeeeet;
 
 
   /**
@@ -29,6 +25,6 @@ public final class Main {
    * <p>If you change your main robot class, change the parameter type.
    */
   public static void main(String... args) {
-    //RobotBase.startRobot(Robot::new);
+    RobotBase.startRobot(Robot::new);
   }
 }

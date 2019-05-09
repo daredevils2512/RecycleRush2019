@@ -14,6 +14,7 @@ public class ManualLift extends Command {
   public ManualLift() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.m_liftPID);
   }
 
   // Called just before this Command runs the first time
