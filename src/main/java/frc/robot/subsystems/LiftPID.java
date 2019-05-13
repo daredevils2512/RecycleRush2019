@@ -26,9 +26,6 @@ public class LiftPID extends PIDSubsystem {
     public float offset = 58;
     public float minSetPoint = 0;
 
-    private DigitalInput liftBottom = new DigitalInput(11);
-    private DigitalInput liftTop = new DigitalInput(10);
-
     private WPI_TalonSRX lift1 = new WPI_TalonSRX(8);
     private WPI_TalonSRX lift2 = new WPI_TalonSRX(2);
     public boolean goingDown;
@@ -54,8 +51,8 @@ public class LiftPID extends PIDSubsystem {
     }
 
     protected void usePIDOutput(double output) {
-        if ((!liftBottom.get() || (output < 0 && Robot.m_intake.solenoidGet() == Value.kForward))
-         && ((!liftTop.get() || Robot.m_oi.extreme.getRawButton(7)) || output > 0 )) {
+        if ((!Robot.liftBottom.getValue() || (output < 0 && Robot.m_intake.solenoidGet() == Value.kForward))
+         && ((!Robot.liftTop.getValue() || Robot.m_oi.extreme.getRawButton(7)) || output > 0 )) {
             float motorSetting;
             if (output > 0.05) {
                 if (output >= 0.1) {
@@ -81,7 +78,7 @@ public class LiftPID extends PIDSubsystem {
     }
 
     public void setMotor(float velocity) {
-        if (!liftBottom.get() && ((!liftTop.get() || Robot.m_oi.extreme.getRawButton(7)) || velocity < 0)) {
+        if (!Robot.liftBottom.getValue() && ((!Robot.liftTop.getValue() || Robot.m_oi.extreme.getRawButton(7)) || velocity < 0)) {
             if (heightEncoder.getRaw() >= -2 && Robot.m_intake.solenoidGet() == Value.kReverse) {
                 lift1.set(velocity);
                 lift2.set(-velocity);
@@ -90,7 +87,7 @@ public class LiftPID extends PIDSubsystem {
                 lift2.set(0);
             }
         } else {
-            if ((velocity > 0 && Robot.m_intake.solenoidGet() == Value.kForward) && ((!liftTop.get() ||
+            if ((velocity > 0 && Robot.m_intake.solenoidGet() == Value.kForward) && ((!Robot.liftTop.getValue() ||
              Robot.m_oi.extreme.getRawButton(7)) || velocity < 0)) {
                  lift1.set(velocity);
                  lift1.set(-velocity);
@@ -102,8 +99,14 @@ public class LiftPID extends PIDSubsystem {
     }
 
     public void runLift(double speed) {
-        lift1.set(speed);
-        lift2.set(speed);
+        if (((Robot.liftBottom.getValue()) && speed < 0) || (Robot.liftTop.getValue()) && speed > 0) {
+            lift1.set(0.0);
+            lift2.set(0.0);
+            System.out.println("limit reached");
+        } else {
+            lift1.set(speed);
+            lift2.set(-speed);
+        }
     }
 
     public PIDController retrivePIDController() {

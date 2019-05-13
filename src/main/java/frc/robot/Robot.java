@@ -29,7 +29,11 @@ public class Robot extends TimedRobot {
   public static Drivetrain m_drivetrain;
   public static Intake m_intake;
   public static LiftPID m_liftPID;
+  public static DigitalInputTrigger liftTop;
+  public static DigitalInputTrigger liftBottom;
+  
   public static OI m_oi;
+  
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -45,11 +49,16 @@ public class Robot extends TimedRobot {
     m_intake = new Intake();
     m_liftPID = new LiftPID();
 
+
     //must be last
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new MecanumDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    
+    liftBottom = new DigitalInputTrigger(RobotMap.liftBottomChannel);
+    liftTop = new DigitalInputTrigger(RobotMap.liftTopChannel);
+  
   }
 
   /**
@@ -62,6 +71,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+
+    SmartDashboard.putBoolean("top switch", Robot.liftTop.getValue());
+    SmartDashboard.putBoolean("bottom switch", Robot.liftBottom.getValue());
   }
 
   /**

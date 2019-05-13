@@ -69,9 +69,11 @@ public class OI {
     rightBumper.whenPressed(new ToggleIntake());
     yButton.whileHeld(new RunIntakeMotors(1.0));
     xButton.whileHeld(new RunIntakeMotors(-1.0));
+    yButton.whenReleased(new RunIntakeMotors(0.0));
+    xButton.whenReleased(new RunIntakeMotors(0.0));
 
     sideButton.whileHeld(new ToteScoot(1));
-    sideButton.whenReleased(new ToteScoot(0));
+    sideButton.whenReleased(new RunIntakeMotors(0.0));
 
     bottomRed.whenPressed(new RunToLevel(0));
     bottomWhite.whenPressed(new RunToLevel(1));

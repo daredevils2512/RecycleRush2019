@@ -30,4 +30,7 @@ public class RobotMap {
 
   public static int leftIntakeID = 0;
   public static int rightIntakeID = 1;
+
+  public static int liftTopChannel = 12;
+  public static int liftBottomChannel = 11;
 }
