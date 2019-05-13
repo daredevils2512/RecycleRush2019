@@ -88,7 +88,8 @@ public class LiftPID extends PIDSubsystem {
     }
 
     public void runLift(double speed) {
-        if (((Robot.liftBottom.getValue()) && speed < 0) || (Robot.liftTop.getValue()) && speed > 0) {
+        if (((Robot.liftBottom.getValue() || Robot.m_intake.solenoidGet() == Value.kReverse) && speed < 0) || ((Robot.liftTop.getValue()) && speed > 0) || 
+          (Robot.liftBottom.getValue() && Robot.m_intake.solenoidGet() == Value.kReverse && speed > 0)) {
             lift1.set(0.0);
             lift2.set(0.0);
             System.out.println("limit reached");
